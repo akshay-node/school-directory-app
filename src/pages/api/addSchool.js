@@ -1,6 +1,6 @@
 import multer from "multer";
 import { connectDB } from "./db";
-const isProd = process.env.NODE_ENV === "production";
+const isProd = process.env.APP_ENV === "production";
 
 let storage;
 
