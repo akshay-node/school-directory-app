@@ -1,13 +1,19 @@
 import multer from "multer";
 import { connectDB } from "./db";
+const isProd = process.env.NODE_ENV === "production";
 
-const storage = multer.diskStorage({
-  destination: "./public/schoolImages",
+let storage;
 
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname);
-  },
-});
+if (isProd) {
+  storage = multer.memoryStorage();
+} else {
+  storage = multer.diskStorage({
+    destination: "./public/schoolImages",
+    filename: (req, file, cb) => {
+      cb(null, Date.now() + "-" + file.originalname);
+    },
+  });
+}
 
 const upload = multer({ storage });
 
