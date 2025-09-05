@@ -28,6 +28,7 @@ export default function AddSchool() {
       if (res.ok) {
         setMessage(result.message);
         reset();
+        window.location.href = '/showSchools';
       } else {
         setMessage(result.error || "Error occurred!");
       }
