@@ -38,7 +38,7 @@ export default async function handler(req, res) {
       if (isProd) {
         if (req.file) {
           // I have no bucket Subcription
-          image = null;
+          image = "/next.svg";
         }
       } else {
         
