@@ -33,13 +33,12 @@ export default async function handler(req, res) {
       await runMiddleware(req, res, upload.single("image"));
 
       const { name, address, city, state, contact, email_id } = req.body;
-      let image = null;
-
+    
+        let image = null;
       if (isProd) {
         if (req.file) {
-
-          const base64Image = req.file.buffer.toString("base64");
-          image = `data:${req.file.mimetype};base64,${base64Image}`;
+          // I have no bucket Subcription
+          image = null;
         }
       } else {
         
