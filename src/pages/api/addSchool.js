@@ -33,7 +33,18 @@ export default async function handler(req, res) {
       await runMiddleware(req, res, upload.single("image"));
 
       const { name, address, city, state, contact, email_id } = req.body;
-      const image = req.file ? `/schoolImages/${req.file.filename}` : null;
+      let imagePath = null;
+
+      if (isProd) {
+        if (req.file) {
+
+          const base64Image = req.file.buffer.toString("base64");
+          imagePath = `data:${req.file.mimetype};base64,${base64Image}`;
+        }
+      } else {
+        
+        imagePath = req.file ? `/schoolImages/${req.file.filename}` : null;
+      };
 
       const db = await connectDB();
       await db.execute(
