@@ -1,7 +1,8 @@
 import mysql from "mysql2/promise";
 
 export async function connectDB() {
-  const url = new URL(process.env.MYSQL_PUBLIC_URL);
+  process.env.MYSQL_PUBLIC_URL || "mysql://root:@localhost:3306/schooldb";
+  const url = new URL(urlString);
   const connection = await mysql.createConnection({
     host: url.hostname,
     port: url.port,
